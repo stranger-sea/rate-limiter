@@ -13,10 +13,6 @@ module rate_limiter(
     output reg [5:0] data_out   // 6 bit rate limited output data 
 );
 
-// initialize data_out to zero
-initial begin
-    data_out = 0;
-end
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 always@(posedge clk) begin
@@ -38,13 +34,8 @@ always@(posedge clk) begin
             else 
                 data_out <= data_out + step_size;        
         end
-        
-        // case 3: data_out equal to data_in (maintain same value)
-        else if(data_out == data_in) begin
-            data_out <= data_in;
-        end
 
-        // case 4: data output signal greater than data input
+        // case 3: data output signal greater than data input
         else if(data_out > data_in) begin
             if(data_out - step_size < data_in)
                 data_out <= data_in;
