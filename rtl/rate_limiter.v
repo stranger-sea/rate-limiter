@@ -21,7 +21,7 @@ always@(posedge clk) begin
         data_out <= 0;
     end
 
-    else begin
+    else if (step_size != 0) begin
         // case 1: data input is less than or equal to step size
         if(data_in <= step_size) begin
             data_out <= data_in;
