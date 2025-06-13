@@ -5,12 +5,16 @@
 // abrupt changes                                                                       //
 //////////////////////////////////////////////////////////////////////////////////////////
 
-module rate_limiter(
+module rate_limiter #(
+    parameter DATA_WIDTH = 6,
+    parameter STEP_WIDTH = 3
+)
+(
     input wire       clk,       // clock input 
     input wire       reset,     // active high synchronous reset
-    input wire [5:0] data_in,   // 6 bit data input to be rate limited
-    input wire [2:0] step_size, // 3 bit step size to control max change per clk cycle 
-    output reg [5:0] data_out   // 6 bit rate limited output data 
+    input wire [DATA_WIDTH-1:0] data_in,   // 6 bit data input to be rate limited
+    input wire [STEP_WIDTH-1:0] step_size, // 3 bit step size to control max change per clk cycle 
+    output reg [DATA_WIDTH-1:0] data_out   // 6 bit rate limited output data 
 );
 
 
